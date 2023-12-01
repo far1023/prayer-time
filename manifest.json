@@ -3,6 +3,10 @@
   "name": "Universal prayer time",
   "description": "An extension to display prayer time on browser",
   "version": "1.0.0",
+  "permissions": ["storage", "geolocation"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "index.html",
     "default_icon": "images/icon-128.png"
@@ -10,6 +14,5 @@
   "icons": {
     "16": "images/icon-16.png",
     "128": "images/icon-128.png"
-  },
-  "permissions": ["geolocation"]
+  }
 }
