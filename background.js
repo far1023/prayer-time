@@ -1,4 +1,4 @@
-const fetchData = () => {
+const fetchCity = () => {
   return fetch('storage/city.json')
     .then((response) => response.json())
     .then((data) => {
@@ -25,8 +25,24 @@ const dateNow = () => {
   });
 };
 
+chrome.runtime.onInstalled.addListener(function () {
+  chrome.storage.local.clear(function () {
+    console.log('xxxxxxx Local storage cleared xxxxxxx ON INSTALL');
+  });
+
+  dateNow();
+});
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.action === 'getPrayerTime') {
-    getPrayerTime();
+  if (request.action === 'fetchCity') {
+    fetchCity();
+  }
+
+  if (request.action === 'generateDate') {
+    chrome.storage.local.clear(function () {
+      console.log('xxxxxxx Local storage cleared xxxxxxx ON GENERATING DATE...');
+    });
+
+    dateNow();
   }
 });
